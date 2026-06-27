@@ -1,0 +1,7 @@
+# Supabase CLI config. The project_id links this folder to your hosted project.
+# Run `supabase link --project-ref bbdsjtamezbdefdegnyt` to authenticate.
+project_id = "bbdsjtamezbdefdegnyt"
+
+[db]
+# Postgres major version of your hosted project (Supabase currently uses 15).
+major_version = 15
