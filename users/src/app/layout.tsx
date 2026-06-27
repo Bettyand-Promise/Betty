@@ -27,10 +27,19 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 
+// Build a square favicon from the admin logo (padded on the brand background so
+// a wide logo isn't squished). Falls back to the default icon when no logo is set.
+function faviconFrom(url: string | null): string | undefined {
+  if (!url || !url.includes('/upload/')) return undefined;
+  return url.replace('/upload/', '/upload/w_64,h_64,c_pad,b_rgb:fbf6f4,f_png/');
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const s = await getSiteSettings();
+  const favicon = faviconFrom(s.logo_url);
   return {
     metadataBase: new URL(SITE_URL),
+    ...(favicon ? { icons: { icon: favicon, shortcut: favicon, apple: favicon } } : {}),
     title: {
       default: s.default_meta_title,
       template: `%s | ${s.business_name}`,
