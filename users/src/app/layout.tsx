@@ -26,6 +26,7 @@ import { SITE_URL, localBusinessJsonLd, organizationJsonLd } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
+import FloatingActions from '@/components/FloatingActions';
 
 // Build a square favicon from the admin logo (padded on the brand background so
 // a wide logo isn't squished). Falls back to the default icon when no logo is set.
@@ -102,6 +103,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Header settings={settings} />
         <main>{children}</main>
         <Footer settings={settings} />
+        <FloatingActions whatsapp={settings.whatsapp} />
       </body>
     </html>
   );

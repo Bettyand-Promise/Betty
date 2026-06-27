@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 import type { HeroSettings, SiteSettings } from '@/lib/types';
 
 /**
@@ -78,6 +79,11 @@ export default function Hero({ hero, settings }: { hero: HeroSettings; settings:
             )}
           </div>
         </div>
+      </div>
+
+      {/* Scroll cue */}
+      <div className="absolute inset-x-0 bottom-7 z-10 flex justify-center">
+        <ChevronDown size={26} className="animate-bounce text-white/70" />
       </div>
 
       {/* Gold hairline at the base of the hero */}

@@ -69,6 +69,18 @@ export function articleJsonLd(article: Article, s: SiteSettings) {
   };
 }
 
+export function faqJsonLd(items: { q: string; a: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+}
+
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',

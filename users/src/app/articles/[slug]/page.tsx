@@ -6,6 +6,7 @@ import { articleJsonLd, breadcrumbJsonLd } from '@/lib/seo';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import ArticleCard from '@/components/ArticleCard';
+import ReadingProgress from '@/components/ReadingProgress';
 
 export const revalidate = 60;
 
@@ -60,6 +61,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
   return (
     <article className="bg-white">
+      <ReadingProgress />
       <JsonLd data={articleJsonLd(article, settings)} />
       <JsonLd
         data={breadcrumbJsonLd([
