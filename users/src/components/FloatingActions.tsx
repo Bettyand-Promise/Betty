@@ -77,11 +77,11 @@ export default function FloatingActions({
       <button
         aria-label="Back to top"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className={`flex h-11 w-11 items-center justify-center bg-brand-ink text-white shadow-card transition-all duration-300 hover:bg-brand-primary ${
+        className={`flex h-10 w-10 items-center justify-center rounded-[999px] bg-brand-ink text-white shadow-card transition-all duration-300 hover:bg-brand-primary ${
           showTop ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
         }`}
       >
-        <ArrowUp size={20} />
+        <ArrowUp size={18} />
       </button>
 
       {digits && (
@@ -136,9 +136,9 @@ export default function FloatingActions({
             {showBadge && (
               <>
                 {/* Pulse ring (disabled for reduced motion) */}
-                <span className="absolute inset-0 -z-10 animate-ping bg-[#25D366] opacity-40 motion-reduce:hidden" />
+                <span className="absolute inset-0 -z-10 animate-ping rounded-[999px] bg-[#25D366] opacity-40 motion-reduce:hidden" />
                 {/* Unread badge */}
-                <span className="absolute -right-1 -top-1 z-10 flex h-5 w-5 items-center justify-center bg-brand-primary text-[11px] font-bold text-white shadow">
+                <span className="absolute -right-0.5 -top-0.5 z-10 flex h-4 w-4 items-center justify-center rounded-[999px] bg-brand-primary text-[10px] font-bold text-white shadow">
                   1
                 </span>
               </>
@@ -150,9 +150,9 @@ export default function FloatingActions({
               }}
               aria-label={open ? 'Close WhatsApp chat' : 'Chat on WhatsApp'}
               aria-expanded={open}
-              className="relative flex h-14 w-14 items-center justify-center bg-[#25D366] text-white shadow-card transition-transform hover:-translate-y-0.5"
+              className="relative flex h-12 w-12 items-center justify-center rounded-[999px] bg-[#25D366] text-white shadow-card transition-transform hover:-translate-y-0.5"
             >
-              {open ? <X size={26} /> : <WhatsAppGlyph size={28} />}
+              {open ? <X size={22} /> : <WhatsAppGlyph size={24} />}
             </button>
           </div>
         </>
