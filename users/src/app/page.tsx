@@ -57,6 +57,33 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Latest articles */}
+      {latest.items.length > 0 && (
+        <section className="bg-brand-bg py-20">
+          <div className="mx-auto max-w-content px-5">
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <span className="eyebrow">From the Blog</span>
+                <h2 className="mt-3 font-serif text-3xl font-semibold text-brand-ink sm:text-4xl">
+                  Latest Articles
+                </h2>
+                <p className="mt-2 text-brand-muted">The 6 newest roofing tips, guides and product insights.</p>
+              </div>
+              <Link href="/articles" className="btn-ghost">
+                View all articles
+              </Link>
+            </div>
+            <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+              {latest.items.map((a, i) => (
+                <Reveal key={a.id} delay={(i % 3) * 90}>
+                  <ArticleCard article={a} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Value props */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-content px-5">
@@ -143,33 +170,6 @@ export default async function HomePage() {
           </Reveal>
         </div>
       </section>
-
-      {/* Latest articles */}
-      {latest.items.length > 0 && (
-        <section className="bg-brand-bg py-20">
-          <div className="mx-auto max-w-content px-5">
-            <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <span className="eyebrow">From the Blog</span>
-                <h2 className="mt-3 font-serif text-3xl font-semibold text-brand-ink sm:text-4xl">
-                  Latest Articles
-                </h2>
-                <p className="mt-2 text-brand-muted">The 6 newest roofing tips, guides and product insights.</p>
-              </div>
-              <Link href="/articles" className="btn-ghost">
-                View all articles
-              </Link>
-            </div>
-            <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-              {latest.items.map((a, i) => (
-                <Reveal key={a.id} delay={(i % 3) * 90}>
-                  <ArticleCard article={a} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* CTA */}
       <section className="relative overflow-hidden bg-brand-deep py-20 text-center text-white">
