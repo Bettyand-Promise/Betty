@@ -2,7 +2,7 @@
 
 An SEO-optimized blog/marketing platform for **Betty & Promise Roofing System**, built to rank
 for *aluminium roofing sheet supply in Lagos, Nigeria*. Pure red + white branding, fully
-admin-controlled hero/carousel/colors/content, Cloudinary media, Supabase data + auth.
+admin-controlled hero/carousel/colors/content, Cloudinary media, Neon Postgres data.
 
 ## Architecture
 
@@ -10,47 +10,49 @@ Three independently deployable apps (one Vercel project each):
 
 | Folder      | What it is                              | Local port | Stack |
 |-------------|------------------------------------------|-----------|-------|
-| `backend/`  | API (reads + admin writes + media sign)  | 4000      | Express + TypeScript, Supabase (service role), Cloudinary |
+| `backend/`  | API (reads + admin writes + media sign)  | 4000      | Express + TypeScript, Neon Postgres (`pg`), Cloudinary |
 | `users/`    | Public site (Home, Articles, About)      | 3000      | Next.js App Router, Tailwind, full SEO layer |
-| `admin/`    | Admin dashboard                          | 3001      | Next.js App Router, Supabase Auth, Tiptap |
-| `supabase/` | `schema.sql` (tables + RLS + seeds)      | —         | Postgres |
+| `admin/`    | Admin dashboard                          | 3001      | Next.js App Router, Tiptap |
+| `backend/db/` | `schema.sql` + setup/import scripts    | —         | Postgres (Neon) |
 
-**Data flow:** the admin app authenticates with Supabase Auth and calls the backend with the
-user's access token. The backend verifies the token + admin role, writes via the Supabase
-service-role key, and signs Cloudinary uploads (browser uploads files directly to Cloudinary).
-The public site server-renders content from the backend's public read endpoints with ISR.
+**Data flow:** the admin app posts the admin email/password to the backend, which verifies them
+server-side (bcrypt) and returns a signed JWT; subsequent admin calls send that JWT. The backend
+is the only thing that talks to the database (via `pg`) and signs Cloudinary uploads (the browser
+uploads files directly to Cloudinary). The public site server-renders content from the backend's
+public read endpoints with ISR. The frontends never connect to the database directly.
 
 ## 1. Prerequisites
 
 - Node.js 18+
-- A [Supabase](https://supabase.com) project
+- A [Neon](https://neon.tech) Postgres database
 - A [Cloudinary](https://cloudinary.com) account
 - A [Vercel](https://vercel.com) account (for deploy)
 
-## 2. Set up Supabase
+## 2. Set up the database (Neon)
 
-1. Create a Supabase project.
-2. Open **SQL Editor**, paste the contents of [`supabase/schema.sql`](supabase/schema.sql) and run it.
-   This creates all tables, RLS policies, and seeds the singleton rows.
-3. Create your admin user: **Authentication → Users → Add user** (email + password).
-4. Promote that user to admin — in the SQL editor run:
-   ```sql
-   insert into public.profiles (id, email, role)
-   values ('<the-new-user-uuid>', '<email>', 'admin')
-   on conflict (id) do update set role = 'admin';
+1. Create a Neon project and copy its **pooled** connection string (host contains `-pooler`).
+   Put it in `backend/.env` as `DATABASE_URL`, and set `ADMIN_EMAIL`.
+2. Generate the admin password hash and paste it into `.env` as `ADMIN_PASSWORD_HASH`:
+   ```bash
+   cd backend && npm install
+   npm run db:hash -- "your-admin-password"
    ```
-5. Grab from **Project Settings → API**: `Project URL`, `anon` key, and `service_role` key.
+3. Create the tables:
+   ```bash
+   npm run db:setup
+   ```
+4. (Optional) Copy existing content from an old Supabase project — see
+   [`backend/db/README.md`](backend/db/README.md) (`npm run db:import`).
 
 ## 3. Configure environment variables
 
 Copy each `.env.example` to `.env` (backend) / `.env.local` (Next apps) and fill in values.
 
-- **backend/.env** — `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY`,
+- **backend/.env** — `DATABASE_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`, `ADMIN_JWT_SECRET`,
   `CLOUDINARY_CLOUD_NAME/_API_KEY/_API_SECRET`, `ALLOWED_ORIGINS` (the users + admin origins).
 - **users/.env.local** — `NEXT_PUBLIC_BACKEND_URL`, `NEXT_PUBLIC_SITE_URL`,
   `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`.
-- **admin/.env.local** — `NEXT_PUBLIC_BACKEND_URL`, `NEXT_PUBLIC_SUPABASE_URL`,
-  `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`.
+- **admin/.env.local** — `NEXT_PUBLIC_BACKEND_URL`, `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`.
 
 ## 4. Run locally
 
@@ -75,7 +77,7 @@ Create three Vercel projects, each with **Root Directory** set to the matching f
    Verify it deployed by opening `https://<backend-url>/api/health`.
 2. **users** → root `users/`. Set `NEXT_PUBLIC_BACKEND_URL` to the backend URL and
    `NEXT_PUBLIC_SITE_URL` to the public site's own URL.
-3. **admin** → root `admin/`. Set `NEXT_PUBLIC_BACKEND_URL` to the backend URL + the Supabase vars.
+3. **admin** → root `admin/`. Set `NEXT_PUBLIC_BACKEND_URL` to the backend URL.
 
 Finally, set the backend's `ALLOWED_ORIGINS` to the deployed users + admin URLs (comma-separated)
 and redeploy the backend so CORS allows them.

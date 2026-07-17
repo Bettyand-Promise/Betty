@@ -22,9 +22,11 @@ function optional(name: string, fallback = ''): string {
 export const env = {
   nodeEnv: process.env.NODE_ENV || 'development',
   isProduction,
-  supabaseUrl: required('SUPABASE_URL'),
-  supabaseServiceRoleKey: required('SUPABASE_SERVICE_ROLE_KEY'),
-  supabaseAnonKey: optional('SUPABASE_ANON_KEY'),
+  // Postgres (Neon) connection string — the single source of DB access.
+  databaseUrl: required('DATABASE_URL'),
+  // Single-admin auth: verified server-side against these (no Supabase Auth).
+  adminEmail: required('ADMIN_EMAIL'),
+  adminPasswordHash: required('ADMIN_PASSWORD_HASH'),
   cloudinaryCloudName: required('CLOUDINARY_CLOUD_NAME'),
   cloudinaryApiKey: required('CLOUDINARY_API_KEY'),
   cloudinaryApiSecret: required('CLOUDINARY_API_SECRET'),

@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { createClient } from '@supabase/supabase-js';
+import bcrypt from 'bcryptjs';
 import { env } from './env';
-import { supabaseAdmin } from './supabase';
 
 export interface AdminTokenPayload {
   sub: string; // user id
@@ -10,33 +9,21 @@ export interface AdminTokenPayload {
 }
 
 /**
- * Verifies email/password against Supabase Auth — entirely server-side. A fresh
- * anon client is used per call so no session state leaks between requests. The
- * admin frontend never touches Supabase; it only ever talks to this backend.
+ * Verifies email/password for the single configured admin — entirely
+ * server-side. The email must match ADMIN_EMAIL and the password must match the
+ * bcrypt ADMIN_PASSWORD_HASH. No external auth service is involved.
  */
 export async function verifyCredentials(
   email: string,
   password: string,
 ): Promise<{ id: string; email: string } | null> {
-  if (!env.supabaseAnonKey) return null;
+  if (!env.adminEmail || !env.adminPasswordHash) return null;
+  if (email.trim().toLowerCase() !== env.adminEmail.trim().toLowerCase()) return null;
 
-  const client = createClient(env.supabaseUrl, env.supabaseAnonKey, {
-    auth: { autoRefreshToken: false, persistSession: false },
-  });
+  const ok = await bcrypt.compare(password, env.adminPasswordHash);
+  if (!ok) return null;
 
-  const { data, error } = await client.auth.signInWithPassword({ email, password });
-  if (error || !data.user) return null;
-
-  // Confirm the authenticated user is a registered admin (service-role read).
-  const { data: profile } = await supabaseAdmin
-    .from('profiles')
-    .select('role')
-    .eq('id', data.user.id)
-    .single();
-
-  if (!profile || profile.role !== 'admin') return null;
-
-  return { id: data.user.id, email: data.user.email ?? email };
+  return { id: 'admin', email: env.adminEmail };
 }
 
 export function issueToken(user: { id: string; email: string }): string {
