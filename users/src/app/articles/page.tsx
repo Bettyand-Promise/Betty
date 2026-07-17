@@ -28,9 +28,10 @@ export default async function ArticlesPage({
 }) {
   const page = Math.max(1, parseInt(searchParams.page || '1', 10));
   const category = searchParams.category;
-  const [data, categories] = await Promise.all([
+  const [data, categories, settings] = await Promise.all([
     getArticles(page, 9, false, category),
     getCategories(),
+    getSiteSettings(),
   ]);
   const qs = (p: number) => `/articles?page=${p}${category ? `&category=${category}` : ''}`;
 
@@ -94,7 +95,7 @@ export default async function ArticlesPage({
           <>
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
               {data.items.map((a) => (
-                <ArticleCard key={a.id} article={a} />
+                <ArticleCard key={a.id} article={a} businessName={settings.business_name} />
               ))}
             </div>
 

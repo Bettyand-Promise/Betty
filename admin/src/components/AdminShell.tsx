@@ -47,11 +47,24 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState<string | null>(null);
   const [logo, setLogo] = useState<string | null>(null);
+  const [businessName, setBusinessName] = useState('');
 
   useEffect(() => {
     setEmail(getAdminEmail());
-    getPublicBranding().then((b) => setLogo(b.logo_url));
+    getPublicBranding().then((b) => {
+      setLogo(b.logo_url);
+      setBusinessName(b.business_name);
+    });
   }, []);
+
+  // Compact initials for the no-logo badge, derived from the business name.
+  const initials =
+    businessName
+      .split(/\s+/)
+      .filter((w) => /[a-z0-9]/i.test(w))
+      .slice(0, 2)
+      .map((w) => w[0]?.toUpperCase())
+      .join('') || '·';
 
   // Close the mobile drawer on navigation.
   useEffect(() => {
@@ -70,15 +83,15 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       <div className="flex items-center gap-2.5 border-b border-white/10 px-5 py-5">
         {logo ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={logoThumb(logo)} alt="First Choice Roofing" className="h-9 w-auto" />
+          <img src={logoThumb(logo)} alt={businessName} className="h-9 w-auto" />
         ) : (
           <div className="flex h-9 w-9 items-center justify-center bg-brand-gold text-sm font-extrabold text-brand-ink">
-            FC
+            {initials}
           </div>
         )}
         <div className="leading-tight">
-          <p className="text-sm font-bold text-white">First Choice</p>
-          <p className="text-[11px] text-white/50">Roofing Admin</p>
+          <p className="text-sm font-bold text-white">{businessName || 'Admin'}</p>
+          <p className="text-[11px] text-white/50">Admin Dashboard</p>
         </div>
       </div>
 

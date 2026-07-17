@@ -1,5 +1,5 @@
 -- =====================================================================
--- First Choice Roofing Services — Supabase schema + RLS
+-- Betty & Promise Roofing System — Supabase schema + RLS
 -- Run this in the Supabase SQL editor (or via `supabase db push`).
 -- =====================================================================
 
@@ -31,7 +31,7 @@ create table if not exists public.profiles (
 -- =====================================================================
 create table if not exists public.site_settings (
   id                  int primary key default 1 check (id = 1),
-  business_name       text not null default 'First Choice Roofing Services',
+  business_name       text not null default 'Betty & Promise Roofing System',
   tagline             text default 'Nigeria''s #1 Aluminium Roofing Sheet Supplier',
   logo_url            text,
   logo_public_id      text,
@@ -51,8 +51,8 @@ create table if not exists public.site_settings (
   instagram_url       text default '',
   twitter_url         text default '',
   linkedin_url        text default '',
-  default_meta_title  text default 'First Choice Roofing Services — Aluminium Roofing Sheets in Lagos, Nigeria',
-  default_meta_description text default 'First Choice Roofing Services is Lagos, Nigeria''s leading supplier of premium aluminium roofing sheets. Quality, durability and expert installation.',
+  default_meta_title  text default 'Betty & Promise Roofing System — Aluminium Roofing Sheets in Lagos, Nigeria',
+  default_meta_description text default 'Betty & Promise Roofing System is Lagos, Nigeria''s leading supplier of premium aluminium roofing sheets. Quality, durability and expert installation.',
   updated_at          timestamptz not null default now()
 );
 
@@ -124,7 +124,7 @@ create table if not exists public.articles (
   keywords          text[] not null default '{}',
   status            text not null default 'draft' check (status in ('draft', 'published')),
   featured          boolean not null default false,
-  author            text default 'First Choice Roofing Services',
+  author            text default 'Betty & Promise Roofing System',
   reading_minutes   int not null default 3,
   published_at      timestamptz,
   created_at        timestamptz not null default now(),
@@ -149,9 +149,9 @@ create table if not exists public.article_categories (
 -- =====================================================================
 create table if not exists public.about_content (
   id          int primary key default 1 check (id = 1),
-  headline    text not null default 'About First Choice Roofing Services',
+  headline    text not null default 'About Betty & Promise Roofing System',
   subheading  text default 'Trusted aluminium roofing sheet supplier in Lagos, Nigeria.',
-  body_html   text default '<p>First Choice Roofing Services is a leading supplier of premium aluminium roofing sheets in Lagos, Nigeria.</p>',
+  body_html   text default '<p>Betty & Promise Roofing System is a leading supplier of premium aluminium roofing sheets in Lagos, Nigeria.</p>',
   image_url   text,
   image_public_id text,
   stats       jsonb not null default '[]'::jsonb,

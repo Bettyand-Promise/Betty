@@ -1,6 +1,6 @@
-# First Choice Roofing Services — SEO Blog Platform
+# Betty & Promise Roofing System — SEO Blog Platform
 
-An SEO-optimized blog/marketing platform for **First Choice Roofing Services**, built to rank
+An SEO-optimized blog/marketing platform for **Betty & Promise Roofing System**, built to rank
 for *aluminium roofing sheet supply in Lagos, Nigeria*. Pure red + white branding, fully
 admin-controlled hero/carousel/colors/content, Cloudinary media, Supabase data + auth.
 

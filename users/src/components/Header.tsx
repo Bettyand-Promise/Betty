@@ -38,6 +38,11 @@ export default function Header({ settings }: { settings: SiteSettings }) {
   const solid = scrolled || open;
   const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
+  // Two-tone wordmark fallback (used when no logo is set): first word in the
+  // brand colour, the remainder in gold. Driven by the DB business name.
+  const [firstWord, ...restWords] = settings.business_name.trim().split(/\s+/);
+  const rest = restWords.join(' ');
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -63,8 +68,8 @@ export default function Header({ settings }: { settings: SiteSettings }) {
                 solid ? 'text-brand-primary' : 'text-white'
               }`}
             >
-              First Choice
-              <span className={solid ? 'text-brand-gold' : 'text-brand-gold'}> Roofing</span>
+              {firstWord}
+              {rest && <span className="text-brand-gold"> {rest}</span>}
             </span>
           )}
         </Link>

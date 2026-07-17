@@ -117,7 +117,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
             </h2>
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((a) => (
-                <ArticleCard key={a.id} article={a} />
+                <ArticleCard key={a.id} article={a} businessName={settings.business_name} />
               ))}
             </div>
           </div>

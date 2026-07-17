@@ -4,7 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import type { CarouselImage } from '@/lib/types';
 
-export default function Carousel({ images }: { images: CarouselImage[] }) {
+export default function Carousel({
+  images,
+  businessName,
+}: {
+  images: CarouselImage[];
+  businessName?: string;
+}) {
   const [index, setIndex] = useState(0);
   const paused = useRef(false);
 
@@ -50,7 +56,7 @@ export default function Carousel({ images }: { images: CarouselImage[] }) {
               <div key={img.id} className="relative h-[360px] min-w-full sm:h-[480px]">
                 <Image
                   src={img.image_url}
-                  alt={img.alt || 'First Choice Roofing aluminium roofing sheets'}
+                  alt={img.alt || `${businessName || 'Our'} aluminium roofing sheets`}
                   fill
                   sizes="100vw"
                   className="object-cover"

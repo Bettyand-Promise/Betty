@@ -26,7 +26,7 @@ async function get<T>(path: string, fallback: T, revalidate = REVALIDATE): Promi
 }
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  business_name: 'First Choice Roofing Services',
+  business_name: 'Betty & Promise Roofing System',
   tagline: "Nigeria's #1 Aluminium Roofing Sheet Supplier",
   logo_url: null,
   primary_color: '#7B1E2B',
@@ -35,7 +35,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   phone: '',
   whatsapp: '',
   whatsapp_greeting:
-    'Welcome to First Choice Roofing Services. How can we help you with your aluminium roofing today?',
+    'Welcome to Betty & Promise Roofing System. How can we help you with your aluminium roofing today?',
   email: '',
   address: 'Lagos, Nigeria',
   city: 'Lagos',
@@ -49,9 +49,9 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   linkedin_url: '',
   tiktok_url: '',
   default_meta_title:
-    'First Choice Roofing Services — Aluminium Roofing Sheets in Lagos, Nigeria',
+    'Betty & Promise Roofing System — Aluminium Roofing Sheets in Lagos, Nigeria',
   default_meta_description:
-    "First Choice Roofing Services is Lagos, Nigeria's leading supplier of premium aluminium roofing sheets.",
+    "Betty & Promise Roofing System is Lagos, Nigeria's leading supplier of premium aluminium roofing sheets.",
 };
 
 const DEFAULT_HERO: HeroSettings = {
@@ -78,10 +78,10 @@ export const getCarousel = () => get<CarouselImage[]>('/carousel', []);
 
 export const getAbout = () =>
   get<AboutContent>('/about', {
-    headline: 'About First Choice Roofing Services',
+    headline: 'About Betty & Promise Roofing System',
     subheading: 'Trusted aluminium roofing sheet supplier in Lagos, Nigeria.',
     body_html:
-      '<p>First Choice Roofing Services is a leading supplier of premium aluminium roofing sheets in Lagos, Nigeria.</p>',
+      '<p>Betty & Promise Roofing System is a leading supplier of premium aluminium roofing sheets in Lagos, Nigeria.</p>',
     image_url: null,
     stats: [],
     team: [],

@@ -15,10 +15,10 @@ export async function getPublicBranding(): Promise<PublicBranding> {
     const d = await res.json();
     return {
       logo_url: d.logo_url ?? null,
-      business_name: d.business_name ?? 'First Choice Roofing Services',
+      business_name: d.business_name ?? 'Betty & Promise Roofing System',
     };
   } catch {
-    return { logo_url: null, business_name: 'First Choice Roofing Services' };
+    return { logo_url: null, business_name: 'Betty & Promise Roofing System' };
   }
 }
 

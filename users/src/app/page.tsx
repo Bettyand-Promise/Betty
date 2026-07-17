@@ -76,7 +76,7 @@ export default async function HomePage() {
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
               {latest.items.map((a, i) => (
                 <Reveal key={a.id} delay={(i % 3) * 90}>
-                  <ArticleCard article={a} />
+                  <ArticleCard article={a} businessName={settings.business_name} />
                 </Reveal>
               ))}
             </div>
@@ -106,7 +106,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <Carousel images={carousel} />
+      <Carousel images={carousel} businessName={settings.business_name} />
 
       {/* How it works */}
       <section className="bg-white py-20">
@@ -142,7 +142,7 @@ export default async function HomePage() {
       {/* SEO intro copy */}
       <section className="bg-brand-bg py-24">
         <Reveal className="mx-auto max-w-3xl px-5 text-center">
-          <span className="eyebrow justify-center">Why First Choice</span>
+          <span className="eyebrow justify-center">Why {settings.business_name}</span>
           <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-brand-ink sm:text-4xl">
             Nigeria&apos;s Leading Aluminium Roofing Sheet Supplier
           </h2>

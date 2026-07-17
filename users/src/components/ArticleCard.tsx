@@ -11,7 +11,13 @@ function formatDate(iso: string | null): string {
   });
 }
 
-export default function ArticleCard({ article }: { article: ArticleSummary }) {
+export default function ArticleCard({
+  article,
+  businessName,
+}: {
+  article: ArticleSummary;
+  businessName?: string;
+}) {
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-brand-ink/8 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
       <Link href={`/articles/${article.slug}`}>
@@ -27,7 +33,7 @@ export default function ArticleCard({ article }: { article: ArticleSummary }) {
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-brand-primary/8">
               <span className="font-serif text-sm font-semibold text-brand-primary">
-                First Choice Roofing
+                {businessName || 'Roofing'}
               </span>
             </div>
           )}

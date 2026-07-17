@@ -26,6 +26,17 @@ const wrap =
   (req: AuthedRequest, res: Response, next: NextFunction) =>
     fn(req, res).catch(next);
 
+// Default article author = the current business name from site settings, so a
+// rebrand flows through without any hardcoded fallback.
+async function defaultAuthor(): Promise<string> {
+  const { data } = await supabaseAdmin
+    .from('site_settings')
+    .select('business_name')
+    .eq('id', 1)
+    .single();
+  return data?.business_name || 'Roofing';
+}
+
 // ---------------------------------------------------------------------
 // Media (Cloudinary)
 // ---------------------------------------------------------------------
@@ -117,6 +128,7 @@ router.post(
     const content = sanitizeRichText(body.content_html);
 
     const row = {
+      author: body.author || (await defaultAuthor()),
       title: body.title,
       slug,
       excerpt: body.excerpt,
@@ -128,7 +140,6 @@ router.post(
       keywords: body.keywords,
       status: body.status,
       featured: body.featured,
-      author: body.author || 'First Choice Roofing Services',
       reading_minutes: estimateReadingMinutes(content),
       published_at: body.status === 'published' ? new Date().toISOString() : null,
     };
@@ -172,7 +183,7 @@ router.put(
       keywords: body.keywords,
       status: body.status,
       featured: body.featured,
-      author: body.author || 'First Choice Roofing Services',
+      author: body.author || (await defaultAuthor()),
       reading_minutes: estimateReadingMinutes(content),
       published_at: becomingPublished ? published_at : null,
     };

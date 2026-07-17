@@ -28,7 +28,8 @@ export default function EditArticlePage() {
           keywords: a.keywords || [],
           status: a.status,
           featured: a.featured,
-          author: a.author || 'First Choice Roofing Services',
+          // Blank falls back to the business name (ArticleForm prefills from branding).
+          author: a.author || '',
           category_ids: (a.article_categories ?? []).map((c) => c.category_id),
         }),
       )

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import { getPublicBranding } from '@/lib/site';
 import type { Category } from '@/lib/types';
 import Editor from './Editor';
 import ImageUpload from './ImageUpload';
@@ -37,7 +38,10 @@ export const EMPTY_ARTICLE: ArticleFormValues = {
   keywords: [],
   status: 'draft',
   featured: false,
-  author: 'First Choice Roofing Services',
+  // Left blank so a new article defaults to the current business name — the
+  // form prefills it from site branding on mount, and the backend also
+  // backfills it if left empty.
+  author: '',
   category_ids: [],
 };
 
@@ -51,6 +55,15 @@ export default function ArticleForm({ initial }: { initial: ArticleFormValues })
 
   useEffect(() => {
     api.get<Category[]>('/categories').then(setCategories).catch(() => setCategories([]));
+  }, []);
+
+  // Prefill a blank author with the current business name from site branding.
+  useEffect(() => {
+    if (v.author) return;
+    getPublicBranding()
+      .then((b) => setV((prev) => (prev.author ? prev : { ...prev, author: b.business_name })))
+      .catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleCategory = (id: string) =>

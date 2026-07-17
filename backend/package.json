@@ -2,7 +2,7 @@
   "name": "firstchoice-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "First Choice Roofing Services — API (Express + Supabase + Cloudinary)",
+  "description": "Betty & Promise Roofing System — API (Express + Supabase + Cloudinary)",
   "main": "dist/src/server.js",
   "engines": {
     "node": ">=18.18"
