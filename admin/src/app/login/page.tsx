@@ -50,7 +50,7 @@ export default function LoginPage() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(60% 80% at 50% 0%, rgba(201,162,39,0.16) 0%, rgba(201,162,39,0) 60%)',
+            'radial-gradient(60% 80% at 50% 0%, rgba(224, 168, 46,0.16) 0%, rgba(224, 168, 46,0) 60%)',
         }}
       />
       <div className="relative w-full max-w-sm">

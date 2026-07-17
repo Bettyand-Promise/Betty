@@ -17,7 +17,7 @@ const serif = Fraunces({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#7B1E2B',
+  themeColor: '#2A2D33',
   width: 'device-width',
   initialScale: 1,
 };
@@ -87,7 +87,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     if (!/^[0-9a-fA-F]{6}$/.test(full)) return fallback;
     return `${parseInt(full.slice(0, 2), 16)} ${parseInt(full.slice(2, 4), 16)} ${parseInt(full.slice(4, 6), 16)}`;
   };
-  const themeVars = `:root{--brand-primary:${channels(settings.primary_color, '123 30 43')};--brand-secondary:${channels(settings.secondary_color, '255 255 255')};}`;
+  const themeVars = `:root{--brand-primary:${channels(settings.primary_color, '42 45 51')};--brand-secondary:${channels(settings.secondary_color, '255 255 255')};}`;
 
   return (
     <html lang="en" className={`${sans.variable} ${serif.variable}`}>

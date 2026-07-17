@@ -28,7 +28,7 @@ const config: Config = {
           bg: 'rgb(var(--brand-bg) / <alpha-value>)',
           ink: 'rgb(var(--brand-ink) / <alpha-value>)',
           secondary: 'rgb(var(--brand-secondary) / <alpha-value>)',
-          muted: '#6B5A5E',
+          muted: '#5C5F66',
         },
       },
       fontFamily: {
@@ -39,9 +39,9 @@ const config: Config = {
         content: '1180px',
       },
       boxShadow: {
-        soft: '0 10px 30px -12px rgba(42, 20, 24, 0.18)',
-        card: '0 18px 40px -20px rgba(42, 20, 24, 0.25)',
-        gold: '0 10px 30px -10px rgba(201, 162, 39, 0.45)',
+        soft: '0 10px 30px -12px rgba(26, 28, 32, 0.18)',
+        card: '0 18px 40px -20px rgba(26, 28, 32, 0.25)',
+        gold: '0 10px 30px -10px rgba(224, 168, 46, 0.45)',
       },
       letterSpacing: {
         wider2: '0.12em',

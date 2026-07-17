@@ -4,11 +4,11 @@
 
 :root {
   /* Channel triplets (R G B) so Tailwind alpha modifiers work. */
-  --brand-primary: 123 30 43;
-  --brand-deep: 74 14 26;
-  --brand-gold: 201 162 39;
-  --brand-bg: 251 246 244;
-  --brand-ink: 42 20 24;
+  --brand-primary: 42 45 51;
+  --brand-deep: 26 28 32;
+  --brand-gold: 224 168 46;
+  --brand-bg: 250 248 243;
+  --brand-ink: 30 32 36;
   --brand-secondary: 255 255 255;
 }
 
@@ -52,7 +52,7 @@ body {
 /* Rich-text (article) content rendered from sanitized Tiptap HTML */
 .prose-article {
   font-size: 1.075rem;
-  color: #3a2a2e;
+  color: #3A3D42;
 }
 .prose-article h2 {
   font-family: var(--font-serif), Georgia, serif;
@@ -91,13 +91,13 @@ body {
   margin: 1.75rem 0;
   max-width: 100%;
   height: auto;
-  box-shadow: 0 18px 40px -20px rgba(42, 20, 24, 0.3);
+  box-shadow: 0 18px 40px -20px rgba(26, 28, 32, 0.3);
 }
 .prose-article blockquote {
   border-left: 3px solid rgb(var(--brand-gold));
   padding: 0.25rem 0 0.25rem 1.25rem;
   margin: 1.75rem 0;
-  color: #5a464b;
+  color: #55585E;
   font-style: italic;
   font-size: 1.15rem;
 }

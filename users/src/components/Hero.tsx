@@ -10,7 +10,7 @@ import type { HeroSettings, SiteSettings } from '@/lib/types';
  */
 export default function Hero({ hero, settings }: { hero: HeroSettings; settings: SiteSettings }) {
   const useImage = hero.background_type === 'image' && !!hero.image_url;
-  const fallbackColor = hero.background_color || settings.default_hero_color || '#7B1E2B';
+  const fallbackColor = hero.background_color || settings.default_hero_color || '#2A2D33';
 
   return (
     <section
@@ -31,7 +31,7 @@ export default function Hero({ hero, settings }: { hero: HeroSettings; settings:
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(105deg, rgba(74,14,26,${0.55 + hero.overlay_opacity * 0.4}) 0%, rgba(74,14,26,${hero.overlay_opacity * 0.6}) 55%, rgba(42,20,24,0.35) 100%)`,
+              background: `linear-gradient(105deg, rgba(74,14,26,${0.55 + hero.overlay_opacity * 0.4}) 0%, rgba(74,14,26,${hero.overlay_opacity * 0.6}) 55%, rgba(26, 28, 32,0.35) 100%)`,
             }}
           />
         </>
@@ -41,7 +41,7 @@ export default function Hero({ hero, settings }: { hero: HeroSettings; settings:
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(120% 120% at 80% 10%, rgba(201,162,39,0.18) 0%, rgba(201,162,39,0) 45%), linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(42,20,24,0.35) 100%)',
+              'radial-gradient(120% 120% at 80% 10%, rgba(224, 168, 46,0.18) 0%, rgba(224, 168, 46,0) 45%), linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(26, 28, 32,0.35) 100%)',
           }}
         />
       )}

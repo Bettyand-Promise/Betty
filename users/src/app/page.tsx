@@ -175,7 +175,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-brand-deep py-20 text-center text-white">
         <div
           className="absolute inset-0"
-          style={{ background: 'radial-gradient(80% 120% at 50% 0%, rgba(201,162,39,0.18) 0%, rgba(201,162,39,0) 55%)' }}
+          style={{ background: 'radial-gradient(80% 120% at 50% 0%, rgba(224, 168, 46,0.18) 0%, rgba(224, 168, 46,0) 55%)' }}
         />
         <Reveal className="relative mx-auto max-w-2xl px-5">
           <span className="eyebrow justify-center">Get Started</span>

@@ -45,7 +45,7 @@ export default async function ArticlesPage({
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(90% 130% at 50% 0%, rgba(201,162,39,0.18) 0%, rgba(201,162,39,0) 55%)',
+              'radial-gradient(90% 130% at 50% 0%, rgba(224, 168, 46,0.18) 0%, rgba(224, 168, 46,0) 55%)',
           }}
         />
         <div className="relative mx-auto max-w-2xl px-5">
