@@ -1,13 +1,20 @@
 import Link from 'next/link';
 import type { SiteSettings } from '@/lib/types';
+import {
+  FacebookIcon,
+  InstagramIcon,
+  XIcon,
+  LinkedInIcon,
+  TikTokIcon,
+} from './BrandIcons';
 
 export default function Footer({ settings }: { settings: SiteSettings }) {
   const socials = [
-    { label: 'Facebook', url: settings.facebook_url },
-    { label: 'Instagram', url: settings.instagram_url },
-    { label: 'Twitter', url: settings.twitter_url },
-    { label: 'LinkedIn', url: settings.linkedin_url },
-    { label: 'TikTok', url: settings.tiktok_url },
+    { label: 'Facebook', url: settings.facebook_url, Icon: FacebookIcon },
+    { label: 'Instagram', url: settings.instagram_url, Icon: InstagramIcon },
+    { label: 'X (Twitter)', url: settings.twitter_url, Icon: XIcon },
+    { label: 'LinkedIn', url: settings.linkedin_url, Icon: LinkedInIcon },
+    { label: 'TikTok', url: settings.tiktok_url, Icon: TikTokIcon },
   ].filter((s) => s.url);
 
   return (
@@ -57,16 +64,18 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
             )}
           </ul>
           {socials.length > 0 && (
-            <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-              {socials.map((s) => (
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              {socials.map(({ label, url, Icon }) => (
                 <a
-                  key={s.label}
-                  href={s.url}
+                  key={label}
+                  href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/75 transition-colors hover:text-brand-gold"
+                  aria-label={label}
+                  title={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/75 transition-colors hover:border-brand-gold hover:text-brand-gold"
                 >
-                  {s.label}
+                  <Icon />
                 </a>
               ))}
             </div>
